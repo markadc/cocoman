@@ -10,21 +10,21 @@ pip install cocoman
 
 ### 发送GET请求
 
-- do 方法默认是 GET 请求
+- do 方法默认是 GET 请求，默认自带ua
 
 ```python
 from cocoman import Spider
 
 s = Spider()
 url = "https://www.baidu.com"
-res = s.do(url)  # 发送 GET 请求，默认自带ua
+res = s.do(url)
 title = res.xpath("//title/text()").get()
 print(title)
 ```
 
 ### 发送POST请求
 
-- do方法传递了 data 或者 json 参数则是 POST 请求
+- do 方法传递了 data 或者 json 参数则是 POST 请求
 
 ```python
 from pprint import pprint
