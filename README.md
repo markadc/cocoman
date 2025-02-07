@@ -10,7 +10,7 @@ pip install cocoman
 
 ### 发送GET请求
 
-- do 方法默认是GET请求
+- do 方法默认是 GET 请求
 
 ```python
 from cocoman import Spider
@@ -24,7 +24,7 @@ print(title)
 
 ### 发送POST请求
 
-- do方法传递了 data 或者 json 参数则是POST请求
+- do方法传递了 data 或者 json 参数则是 POST 请求
 
 ```python
 from pprint import pprint
