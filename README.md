@@ -8,6 +8,12 @@ pip install cocoman
 
 ## 演示
 
+### do 方法
+
+- 参数跟 `requests` 的参数保持一致
+- 默认自带`重试`、`ua`
+- 请求失败时，可以通过 `raise_request_error` 参数选择不抛出异常
+
 ### 发送GET请求
 
 - do 方法默认是 GET 请求，默认自带ua
