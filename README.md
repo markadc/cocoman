@@ -21,9 +21,9 @@ pip install cocoman
 ```python
 from cocoman import Spider
 
-s = Spider()
+coco = Spider()
 url = "https://www.baidu.com"
-res = s.do(url)
+res = coco.do(url)
 title = res.xpath("//title/text()").get()
 print(title)
 ```
@@ -37,15 +37,14 @@ from pprint import pprint
 
 from cocoman import Spider
 
-s = Spider()
+coco = Spider()
 
 api = "https://httpbin.org/post"
 form_data = {"type": "请求表单"}
-res = s.do(api, data=form_data)
+res = coco.do(api, data=form_data)
 pprint(res.json())
 
 json_body = {"type": "JSON请求体"}
-res = s.do(api, json=json_body)
+res = coco.do(api, json=json_body)
 pprint(res.json())
-
 ```
