@@ -104,30 +104,31 @@ def get_results(fs: list, timeout: int | float = None):
 
 now = lambda: datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+color_codes = {
+    "black": "30",
+    "red": "31",
+    "green": "32",
+    "yellow": "33",
+    "blue": "34",
+    "magenta": "35",
+    "cyan": "36",
+    "white": "37",
+    "gray": "90",
+    "light_red": "91",
+    "light_green": "92",
+    "light_yellow": "93",
+    "light_blue": "94",
+    "light_magenta": "95",
+    "light_cyan": "96",
+    "light_white": "97",
+}
 
-def cprint(content, color=None):
+
+def print_color(content, color=None):
     """带颜色的打印"""
-    color_codes = {
-        "black": "30",
-        "red": "31",
-        "green": "32",
-        "yellow": "33",
-        "blue": "34",
-        "magenta": "35",
-        "cyan": "36",
-        "white": "37",
-        "gray": "90",
-        "light_red": "91",
-        "light_green": "92",
-        "light_yellow": "93",
-        "light_blue": "94",
-        "light_magenta": "95",
-        "light_cyan": "96",
-        "light_white": "97",
-    }
-    color_code = color_codes.get(color)
-    if color_code:
-        print(f"\033[{color_code}m{now()}  {content}\033[0m")
+    code = color_codes.get(color)
+    if code:
+        print(f"\033[{code}m{now()}  {content}\033[0m")
     else:
         print(f"{now()}  {content}")
 
