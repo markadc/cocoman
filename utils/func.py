@@ -128,7 +128,7 @@ def print_color(content, color=None):
     """带颜色的打印"""
     code = color_codes.get(color)
     if code:
-        print(f"\033[{code}m{now()}  {content}\033[0m")
+        print("\033[{}m{}  {}\033[0m".format(code, now(), content))
     else:
         print(f"{now()}  {content}")
 
