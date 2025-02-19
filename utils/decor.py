@@ -10,7 +10,7 @@ def retry(times=2, rest=1, is_raise=True, failed=None):
     """重试（当函数异常时，触发重试）"""
 
     def outer(func):
-        fuc_name = func.__name__
+        func_name = func.__name__
 
         @wraps(func)
         def inner(*args, **kwargs):
@@ -19,12 +19,12 @@ def retry(times=2, rest=1, is_raise=True, failed=None):
                 try:
                     return func(*args, **kwargs)
                 except Exception as e:
-                    logger.error("{} | {}".format(e, fuc_name))
+                    logger.error("{} => {}".format(e, func_name))
                     time.sleep(rest)
                     err = e
             if is_raise:
-                raise MaxRetryError("{} | {}".format(err, fuc_name))
-            logger.critical("重试也失败 | {}".format(fuc_name))
+                raise MaxRetryError("{} => {}".format(err, func_name))
+            logger.critical("重试也失败 => {}".format(func_name))
             return failed
 
         return inner
