@@ -41,7 +41,7 @@ class ProxyAPI(ABC):
 if __name__ == '__main__':
     class DemoProxyAPI(ProxyAPI):
         def get_proxy(self):
-            return random.uniform(1, 100)
+            return "{:.2f}".format(random.uniform(1, 100))
 
 
     demo = DemoProxyAPI(interval=3)

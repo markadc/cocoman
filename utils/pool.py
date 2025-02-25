@@ -1,4 +1,6 @@
+import random
 import threading
+import time
 from abc import ABC, abstractmethod
 from concurrent.futures import ThreadPoolExecutor, Future, wait as _wait
 from functools import partial
@@ -97,3 +99,25 @@ class PoolMan(BasePool):
             self.count -= 1
             self.running_futures.remove(future)
             self.add_task.notify()
+
+
+if __name__ == '__main__':
+    def job(tid):
+        logger.info(f"{tid} RUNNING")
+        time.sleep(random.randint(1, 3))
+        logger.success(f"{tid} SUCCESS")
+
+
+    # 方式1（慢）
+    pool = PoolWait(5)
+    i = 0
+    while True:
+        i = i + 1 if i < 5 else 1
+        pool.add(job, i)
+
+    # 方式2（快）
+    # pool = PoolMan(5)
+    # i = 0
+    # while True:
+    #     i = i + 1 if i < 5 else 1
+    #     pool.add(job, i)

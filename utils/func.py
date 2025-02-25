@@ -133,6 +133,17 @@ def print_color(content, color=None):
         print(f"{now()}  {content}")
 
 
+def lprint(content, all_add_color=True, color=None):
+    code = color_codes.get(color)
+    if code:
+        if all_add_color is True:
+            print("\033[{}m{}  {}\033[0m".format(code, now(), content))
+        else:
+            print("\033[{}m{}\033[0m  {}".format(code, now(), content))
+    else:
+        print(f"{now()}  {content}")
+
+
 def jsonp2json(jsonp: str):
     """jsonp转换为json"""
     data: dict = json.loads(re.match(".*?({.*}).*", jsonp, re.S).group(1))
@@ -212,3 +223,17 @@ def save_file(path: str, content: str | bytes, encoding="UTF-8"):
         os.makedirs(p_dir)
     with open(path, mode, encoding=None if mode == "wb" else encoding) as f:
         f.write(content)
+
+
+if __name__ == '__main__':
+    msg = "猜猜我是谁"
+
+    lprint(msg)
+
+    lprint(msg, color="red")
+    lprint(msg, color="yellow")
+    lprint(msg, color="blue")
+
+    lprint(msg, all_add_color=False, color="red")
+    lprint(msg, all_add_color=False, color="yellow")
+    lprint(msg, all_add_color=False, color="blue")
