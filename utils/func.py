@@ -144,6 +144,11 @@ def lprint(content, all_add_color=True, color=None):
         print(f"{now()}  {content}")
 
 
+def prints(src, color: str = None):
+    code = color_codes.get(color)
+    print("\033[{}m{}\033[0m".format(code, src)) if code else print(src)
+
+
 def jsonp2json(jsonp: str):
     """jsonp转换为json"""
     data: dict = json.loads(re.match(".*?({.*}).*", jsonp, re.S).group(1))
@@ -237,3 +242,8 @@ if __name__ == '__main__':
     lprint(msg, all_add_color=False, color="red")
     lprint(msg, all_add_color=False, color="yellow")
     lprint(msg, all_add_color=False, color="blue")
+
+    prints("Hello Python", "red")
+    prints("Hello Python", "yellow")
+    prints("Hello Python", "blue")
+    prints("Hello Python", "green")
