@@ -124,8 +124,14 @@ color_codes = {
 }
 
 
-def print_color(content, color=None):
-    """带颜色的打印"""
+def print_color(src, color: str = None):
+    """仅加入颜色"""
+    code = color_codes.get(color)
+    print("\033[{}m{}\033[0m".format(code, src)) if code else print(src)
+
+
+def prints(content, color: str = None):
+    """时间、颜色"""
     code = color_codes.get(color)
     if code:
         print("\033[{}m{}  {}\033[0m".format(code, now(), content))
@@ -133,7 +139,8 @@ def print_color(content, color=None):
         print(f"{now()}  {content}")
 
 
-def lprint(content, all_add_color=True, color=None):
+def lprint(content, all_add_color=True, color: str = None):
+    """prints 的加强版"""
     code = color_codes.get(color)
     if code:
         if all_add_color is True:
@@ -142,11 +149,6 @@ def lprint(content, all_add_color=True, color=None):
             print("\033[{}m{}\033[0m  {}".format(code, now(), content))
     else:
         print(f"{now()}  {content}")
-
-
-def prints(src, color: str = None):
-    code = color_codes.get(color)
-    print("\033[{}m{}\033[0m".format(code, src)) if code else print(src)
 
 
 def jsonp2json(jsonp: str):
@@ -231,19 +233,29 @@ def save_file(path: str, content: str | bytes, encoding="UTF-8"):
 
 
 if __name__ == '__main__':
-    msg = "猜猜我是谁"
+    # 仅颜色
+    print_color("Hello Python", "red")
+    print_color("Hello Python", "yellow")
+    print_color("Hello Python", "blue")
+    print_color("Hello Python", "green")
+    print()
 
-    lprint(msg)
-
-    lprint(msg, color="red")
-    lprint(msg, color="yellow")
-    lprint(msg, color="blue")
-
-    lprint(msg, all_add_color=False, color="red")
-    lprint(msg, all_add_color=False, color="yellow")
-    lprint(msg, all_add_color=False, color="blue")
-
+    # 时间、颜色
     prints("Hello Python", "red")
     prints("Hello Python", "yellow")
     prints("Hello Python", "blue")
     prints("Hello Python", "green")
+    print()
+
+    msg = "猜猜我是谁"
+    lprint(msg)
+    lprint(msg, color="red")
+    lprint(msg, color="yellow")
+    lprint(msg, color="blue")
+    lprint(msg, color="green")
+    print()
+
+    lprint(msg, all_add_color=False, color="red")
+    lprint(msg, all_add_color=False, color="yellow")
+    lprint(msg, all_add_color=False, color="blue")
+    lprint(msg, all_add_color=False, color="green")
