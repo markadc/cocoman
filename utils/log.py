@@ -40,24 +40,25 @@ color_level = {
 
 class Log:
     def __init__(self, level="DEBUG"):
+        assert level in ["DEBUG", "INFO", "WARNING", "ERROR", "SUCCESS"]
         self.level = level
 
     def debug(self, msg):
-        self.print_color(msg, "blue")
+        self.default_print(msg, "blue")
 
     def info(self, msg):
-        self.print_color(msg)
+        self.default_print(msg)
 
     def warning(self, msg):
-        self.print_color(msg, "yellow")
+        self.default_print(msg, "yellow")
 
     def error(self, msg):
-        self.print_color(msg, "red")
+        self.default_print(msg, "red")
 
     def success(self, msg):
-        self.print_color(msg, "green")
+        self.default_print(msg, "green")
 
-    def print_color(self, content, color=None):
+    def default_print(self, content, color=None):
         """带颜色的打印"""
         level = color_level.get(color)
         if log_priority.get(level) < log_priority.get(self.level):
