@@ -37,3 +37,25 @@ class CookieHelper:
         self.cookie_dict.pop(key)
         self.cookie_str = self.cookie_to_str(self.cookie_dict)
         return self.cookie_str
+
+    def list_keys(self) -> list[str]:
+        return list(self.cookie_dict.keys())
+
+
+def test():
+    cokie = "a=1; b=2; c=3; d=4; e=5"
+    ch = CookieHelper(cokie)
+
+    keys = ch.list_keys()
+    print(keys)
+
+    a = ch.get_value("a")
+    print(a)
+
+    ch.remove_value("c")
+    print(ch.cookie_str)
+    print(ch.cookie_dict)
+
+
+if __name__ == '__main__':
+    test()

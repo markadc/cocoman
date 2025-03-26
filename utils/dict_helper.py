@@ -12,14 +12,14 @@ class DictConvertObject:
             value = self._src[key]
             if isinstance(value, dict):
                 return DictConvertObject(value)
-            if isinstance(value, list):
+            elif isinstance(value, list):
                 return [DictConvertObject(v) if isinstance(v, dict) else v for v in value]
             return value
         else:
             raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{key}'")
 
 
-if __name__ == '__main__':
+def test():
     src = {
         "data": {
             "list": [
@@ -46,3 +46,7 @@ if __name__ == '__main__':
     print(data.data.list[0].other[0].mark)
     print(data.status)
     print(data.code)
+
+
+if __name__ == '__main__':
+    test()
