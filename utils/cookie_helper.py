@@ -33,7 +33,7 @@ class CookieHelper:
         return match.group(1)
 
     def remove_value(self, key: str) -> str:
-        """删除 Cookie 中某个字段"""
-        temp = self.cookie_dict.pop(key)
+        """删除 Cookie 中某个字段，然后返回新的 Cookie"""
+        self.cookie_dict.pop(key)
         self.cookie_str = self.cookie_to_str(self.cookie_dict)
-        return temp
+        return self.cookie_str
