@@ -1,3 +1,4 @@
+from cocoman.utils.cookie_helper import CookieHelper
 from cocoman.utils.decor import *
 from cocoman.utils.func import *
 from cocoman.utils.log import Log
