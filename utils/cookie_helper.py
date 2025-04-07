@@ -42,7 +42,7 @@ class CookieHelper:
         return list(self.cookie_dict.keys())
 
 
-def test():
+if __name__ == '__main__':
     cokie = "a=1; b=2; c=3; d=4; e=5"
     ch = CookieHelper(cokie)
 
@@ -55,7 +55,3 @@ def test():
     ch.remove_value("c")
     print(ch.cookie_str)
     print(ch.cookie_dict)
-
-
-if __name__ == '__main__':
-    test()
