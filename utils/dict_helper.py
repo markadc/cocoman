@@ -19,7 +19,7 @@ class DictConvertObject:
             raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{key}'")
 
 
-def test():
+if __name__ == '__main__':
     src = {
         "data": {
             "list": [
@@ -46,7 +46,3 @@ def test():
     print(data.data.list[0].other[0].mark)
     print(data.status)
     print(data.code)
-
-
-if __name__ == '__main__':
-    test()
