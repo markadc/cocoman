@@ -14,19 +14,29 @@ def retry(times=2, rest=1, is_raise=True, failed=None):
 
         @wraps(func)
         def inner(*args, **kwargs):
-            err = None
             for i in range(times + 1):
                 try:
                     return func(*args, **kwargs)
                 except Exception as e:
                     logger.error("{} => {}".format(e, func_name))
+                    if i == times:
+                        if is_raise:
+                            raise MaxRetryError("{}. {}".format(e, func_name))
+                        break
                     time.sleep(rest)
-                    err = e
-            if is_raise:
-                raise MaxRetryError("{} => {}".format(err, func_name))
-            logger.critical("重试也失败 => {}".format(func_name))
+
+            logger.critical("Trying again also failed. {}".format(func_name))
             return failed
 
         return inner
 
     return outer
+
+
+if __name__ == '__main__':
+    @retry(3, 1, is_raise=True)
+    def test():
+        return 1 / 0
+
+
+    test()
