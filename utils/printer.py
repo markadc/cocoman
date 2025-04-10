@@ -57,6 +57,10 @@ class Printer(ColorPrinter):
 
 if __name__ == '__main__':
     p = Printer()
+
+    p.output("警告输出", p.YELLOW)
+    p.output("错误输出", p.RED)
+
     p.red("红色")
     p.yellow("黄色")
     p.blue("蓝色")
