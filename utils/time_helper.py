@@ -2,7 +2,7 @@ import time
 from datetime import datetime, timedelta
 
 
-class TimeHelper:
+class TimeConvert:
     @staticmethod
     def ts2time(ts: float) -> str:
         """时间戳转时间"""
@@ -29,9 +29,30 @@ class TimeHelper:
         return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
+class Timer:
+    def __init__(self, desc: str):
+        self.desc = desc
+
+    def __enter__(self):
+        self.start_time = time.time()
+        return self
+
+    def __exit__(self, *args):
+        self.end_time = time.time()
+        print(f"{self.desc}: cons {self.end_time - self.start_time:.2f} sec")
+
+
 if __name__ == '__main__':
-    th = TimeHelper()
-    ts = th.today_anytime_ts(12, 0, 0)
-    print(th.ts2time(ts))
-    print(th.now())
-    print(th.time2ts("2025-01-01 12:00:00"))
+    t = TimeConvert()
+    ts = t.today_anytime_ts(12, 0, 0)
+    print(t.ts2time(ts))
+    print(t.now())
+    print(t.time2ts("2025-01-01 12:00:00"))
+
+    with Timer("计时器-1"):
+        lis = [i for i in range(1000000)]
+
+    with Timer("计时器-2"):
+        lis2 = []
+        for i in range(1000000):
+            lis2.append(i)
