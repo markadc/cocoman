@@ -63,8 +63,7 @@ class Log:
         level = color_level.get(color)
         if log_priority.get(level) < log_priority.get(self.level):
             return
-        code = codes.get(color)
-        if code:
+        if code := codes.get(color):
             print("\033[{}m{}  {}\033[0m".format(code, now(), content))
         else:
             print(f"{now()}  {content}")

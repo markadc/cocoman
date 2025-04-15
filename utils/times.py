@@ -4,15 +4,15 @@ from datetime import datetime, timedelta
 
 class TimeConvert:
     @staticmethod
-    def ts2time(ts: float) -> str:
+    def ts_to_time(ts: float) -> str:
         """时间戳转时间"""
         date_fmt = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(ts))
         return date_fmt
 
     @staticmethod
-    def time2ts(date_fmt: str) -> int:
+    def time_to_ts(date_formatted: str) -> int:
         """时间转时间戳"""
-        ts = time.mktime(time.strptime(date_fmt, "%Y-%m-%d %H:%M:%S"))
+        ts = time.mktime(time.strptime(date_formatted, "%Y-%m-%d %H:%M:%S"))
         return int(ts)
 
     @staticmethod
@@ -44,10 +44,10 @@ class Timer:
 
 if __name__ == '__main__':
     t = TimeConvert()
-    ts = t.today_anytime_ts(12, 0, 0)
-    print(t.ts2time(ts))
-    print(t.now())
-    print(t.time2ts("2025-01-01 12:00:00"))
+    ts = t.today_anytime_ts(21, 22, 23)
+    print("时间戳转时间：{}".format(t.ts_to_time(ts)))
+    print("时间转时间戳 {}".format(t.time_to_ts("2025-01-01 12:00:00")))
+    print("现在的时间是：{}".format(t.now()))
 
     with Timer("计时器-1"):
         lis = [i for i in range(1000000)]

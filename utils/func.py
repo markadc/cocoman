@@ -55,23 +55,19 @@ def timef(ts: int | float) -> str:
     return datetime.fromtimestamp(ts).strftime("%Y-%m-%d %H:%M:%S")
 
 
-def wlog(msg: str, show: bool):
-    if show:
-        logger.warning(msg)
-
-
-def nget(data: dict, *args, log=False, default=None):
+def nget(data: dict, keys: str, default=None):
     """字典多层取值，KEY不存在则返回<default>"""
     temp = data
-    for i, a in enumerate(args):
+    keys = keys.split(".")
+    for i, a in enumerate(keys):
         if a not in temp:
-            wlog(f"KEY {a!r} miss", log)
+            print_color(f"KEY {a!r} miss", "red")
             return default
         temp = temp.get(a)
-        if i == len(args) - 1:
+        if i == len(keys) - 1:
             return temp
         if not isinstance(temp, dict):
-            wlog(f"KEY {a!r} VALUE {temp!r} not is dict", log)
+            print_color(f"KEY {a!r} VALUE {temp!r} not is dict", "red")
             return default
     return temp
 
@@ -126,7 +122,7 @@ color_codes = {
 
 def print_color(src, color: str = None):
     """仅加入颜色"""
-    code = color_codes.get(color)
+    code = color_codes.get(color.lower())
     print("\033[{}m{}\033[0m".format(code, src)) if code else print(src)
 
 
@@ -259,3 +255,13 @@ if __name__ == '__main__':
     lprint(msg, all_add_color=False, color="yellow")
     lprint(msg, all_add_color=False, color="blue")
     lprint(msg, all_add_color=False, color="green")
+
+    data = {"person": {"info": {"name": "Alice", "age": 30, "city": "New York"}}}
+    print(nget(data, "person.info.name"))
+    print(nget(data, "person.info.name.age"))
+    print(nget(data, "person.info.name2"))
+
+    from cocoman.utils.dicter import DictConvertObject
+
+    d = DictConvertObject(data)
+    print(d.person.info.age)

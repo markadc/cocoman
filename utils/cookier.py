@@ -1,7 +1,7 @@
 import re
 
 
-class CookieHelper:
+class Cookier:
     def __init__(self, cookie: str | dict):
         assert isinstance(cookie, (str, dict)), "Cookie must be str or dict"
         if isinstance(cookie, str):
@@ -43,15 +43,15 @@ class CookieHelper:
 
 
 if __name__ == '__main__':
-    cokie = "a=1; b=2; c=3; d=4; e=5"
-    ch = CookieHelper(cokie)
+    cookie = "a=1; b=2; c=3; d=4; e=5"
+    c = Cookier(cookie)
 
-    keys = ch.list_keys()
+    keys = c.list_keys()
     print(keys)
 
-    a = ch.get_value("a")
+    a = c.get_value("a")
     print(a)
 
-    ch.remove_value("c")
-    print(ch.cookie_str)
-    print(ch.cookie_dict)
+    c.remove_value("c")
+    print(c.cookie_str)
+    print(c.cookie_dict)
